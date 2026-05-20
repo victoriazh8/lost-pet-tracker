@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Lost Pet Tracker",
+  "version": "1.0.0",
+  "description": "Scan any webpage for lost/found pet posts and instantly check for matches.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "icons": {
+    "128": "icons/icon.svg"
+  }
+}

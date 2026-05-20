@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Lost Pet Tracker</h1>
+    <p class="subtitle">Scan this page for pet posts</p>
+  </div>
+
+  <div id="initial" class="section">
+    <button id="scanBtn" class="btn btn-primary">Scan Page</button>
+    <p class="hint">Or highlight specific text before scanning</p>
+  </div>
+
+  <div id="loading" class="section hidden">
+    <div class="spinner"></div>
+    <p id="loadingText">Scanning page...</p>
+  </div>
+
+  <div id="parsed" class="section hidden">
+    <h2>Detected Pet</h2>
+    <div id="petInfo" class="pet-card"></div>
+    <div class="actions">
+      <button id="matchBtn" class="btn btn-primary">Check for Matches</button>
+      <button id="saveBtn" class="btn btn-secondary">Save to Database</button>
+    </div>
+  </div>
+
+  <div id="matches" class="section hidden">
+    <h2>Potential Matches</h2>
+    <div id="matchList"></div>
+  </div>
+
+  <div id="saved" class="section hidden">
+    <div class="success-msg">Saved to Lost Pet Tracker.</div>
+    <button id="savedRetryBtn" class="btn btn-secondary" style="margin-top:10px">Scan Another Page</button>
+  </div>
+
+  <!-- Bulk scan mode -->
+  <div id="bulk" class="section hidden">
+    <div class="bulk-count">
+      <span id="feedCount">0</span> pet posts detected on this page
+    </div>
+    <p class="hint">These will be parsed and added to the database automatically.</p>
+    <button id="bulkImportBtn" class="btn btn-primary">Import All</button>
+    <button id="singleModeBtn" class="btn btn-secondary" style="margin-top:6px">Scan as Single Post Instead</button>
+  </div>
+
+  <!-- Bulk done -->
+  <div id="bulkDone" class="section hidden">
+    <div class="success-msg">
+      Added <strong id="bulkAdded">0</strong> new posts
+      (<span id="bulkSkipped">0</span> already in database).
+    </div>
+    <button id="bulkRetryBtn" class="btn btn-secondary" style="margin-top:10px">Scan Another Page</button>
+  </div>
+
+  <div id="error" class="section hidden">
+    <div class="error-msg" id="errorText"></div>
+    <button id="retryBtn" class="btn btn-secondary">Try Again</button>
+  </div>
+
+  <div id="noPet" class="section hidden">
+    <p class="no-pet-msg">No pet-related content detected on this page.</p>
+    <button id="retryBtn2" class="btn btn-secondary">Try Again</button>
+  </div>
+
+  <script src="extractors.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables — never commit these
+.env
+.env.*
+!.env.example
+
+# SQLite database
+backend/pets.db
+backend/uploads/
+
+# Auto-generated at build time by fetch_breeds.py
+backend/ml/breeds.json
+
+# Python virtualenv (created by Dockerfile build locally)
+backend/.venv/
+
+# SQLite databases at any depth
+*.db
+
+# Firebase (unused — project uses Fly.io + Vercel)
+.firebase/
+.firebaserc
+
+# Claude Code local config
+.claude/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel

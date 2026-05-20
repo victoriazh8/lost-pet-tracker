@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.*
+pets.db
+uploads/
+*.log
+.git
+.gitignore
+tests/
+README.md
