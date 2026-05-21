@@ -1,14 +1,14 @@
-# Lost Pet Tracker
+# PetReunite
 
 A full-stack app that consolidates lost and found pet posts from across the web and uses AI/ML to match them — helping reunite pets with their owners faster.
 
-**Live:** [lost-pet-tracker-five.vercel.app](https://lost-pet-tracker-five.vercel.app) · API: [lost-pet-tracker-api.fly.dev](https://lost-pet-tracker-api.fly.dev/api/stats)
+**Live:** [petreunite.vercel.app](https://petreunite.vercel.app) · API: [lost-pet-tracker-api.fly.dev](https://lost-pet-tracker-api.fly.dev/api/stats)
 
 ---
 
 ## The Problem
 
-When a pet goes missing, owners post on a dozen different platforms — Nextdoor, Reddit, Craigslist, Facebook, Citizen. Someone who finds a stray checks a different platform. The information is siloed. Lost Pet Tracker bridges that gap by pulling posts into one place and automatically scoring potential matches.
+When a pet goes missing, owners post on a dozen different platforms — Nextdoor, Reddit, Craigslist, Facebook, Citizen. Someone who finds a stray checks a different platform. The information is siloed. PetReunite bridges that gap by pulling posts into one place and automatically scoring potential matches.
 
 ---
 
@@ -66,7 +66,7 @@ CLIP cosine similarity is the primary signal (70%) with text as confirmation (30
 │  POST /api/report      — file upload    │
 │  GET  /api/pets        — listings       │
 │  GET  /api/pets/:id/matches             │
-│  POST /api/parse-post  — Claude NLP     │
+│  POST /api/parse-post  — NLP extraction  │
 │  POST /api/sync/reddit                  │
 │  POST /api/sync/craigslist              │
 │  POST /api/batch-report — extension     │
@@ -80,7 +80,7 @@ CLIP cosine similarity is the primary signal (70%) with text as confirmation (30
 │ better-     │  │                       │
 │  sqlite3    │  │  Reddit JSON API      │
 │             │  │  Craigslist HTML      │
-│  pets       │  │  Claude Haiku (NLP)   │
+│  pets       │  │  Claude Haiku (opt.)  │
 │  embeddings │  │  CLIP ViT-B-32        │
 └─────────────┘  └───────────────────────┘
          ▲
