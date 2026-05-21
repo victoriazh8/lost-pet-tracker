@@ -15,7 +15,7 @@ export default function Navbar() {
     <nav className="w-full bg-white shadow-sm border-b border-gray-100 px-6 py-4">
       <div className="flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-teal-600">
-          Lost Pet Finder
+          PetReunite
         </Link>
 
         {/* Desktop links */}
