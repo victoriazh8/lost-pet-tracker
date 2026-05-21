@@ -1,5 +1,4 @@
-// const API_BASE = 'https://lost-pet-tracker-api.fly.dev';
-const API_BASE = 'http://localhost:3001';
+const API_BASE = 'https://lost-pet-tracker-api.fly.dev';
 
 // DOM refs
 const sections = {
