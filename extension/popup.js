@@ -19,8 +19,12 @@ const errorText   = document.getElementById('errorText');
 
 let parsedPet = null;
 let pageImageUrl = null;
+let selectedImageFile = null; // file picked via "Replace photo" input
 let pendingBulkPosts = [];
 let singlePostFallback = null; // {text, imageUrl} saved when bulk mode shown
+
+// Always start at the initial screen — prevents stale state if Chrome caches the popup
+showSection('initial');
 
 // Lightweight hash for dedup — same text always produces same id
 function simpleHash(str) {
@@ -238,8 +242,10 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
     formData.append('dateLost', data.dateLost);
     formData.append('description', data.description);
 
-    if (pageImageUrl) {
-      formData.append('imageUrl', pageImageUrl);
+    if (selectedImageFile) {
+      formData.append('image', selectedImageFile);       // uploaded file → multer
+    } else if (pageImageUrl) {
+      formData.append('imageUrl', pageImageUrl);         // scraped URL → server downloads it
     }
 
     const res = await fetch(`${API_BASE}/api/report`, {
@@ -256,18 +262,32 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   }
 });
 
-// Retry buttons
+// Retry / start-over buttons
 document.getElementById('retryBtn').addEventListener('click', () => showSection('initial'));
 document.getElementById('retryBtn2').addEventListener('click', () => showSection('initial'));
+document.getElementById('startOverBtn').addEventListener('click', () => {
+  parsedPet = null;
+  pageImageUrl = null;
+  selectedImageFile = null;
+  showSection('initial');
+});
 
 // --- Render helpers ---
 
 function renderPetCard(pet, imageUrl) {
   let html = '';
 
-  if (imageUrl) {
-    html += `<img src="${escapeHtml(imageUrl)}" alt="Pet photo" class="pet-image" onerror="this.style.display='none'">`;
-  }
+  // Image section — shows current photo with replace/remove controls
+  html += `<div class="image-section">
+    <div id="imgPreviewWrap" style="${imageUrl ? '' : 'display:none'}">
+      <img id="imgPreview" src="${escapeHtml(imageUrl || '')}" alt="Pet photo" class="pet-image" onerror="this.parentElement.style.display='none'">
+      <button type="button" id="removeImgBtn" class="btn-link remove-img">✕ Remove photo</button>
+    </div>
+    <label class="upload-label">
+      <input type="file" id="imageFileInput" accept="image/*" style="display:none">
+      <span id="uploadLabelText">${imageUrl ? 'Replace photo' : '📷 Add photo'}</span>
+    </label>
+  </div>`;
 
   html += `
     <div class="edit-row">
@@ -312,6 +332,28 @@ function renderPetCard(pet, imageUrl) {
   `;
 
   petInfo.innerHTML = html;
+
+  // Wire image controls
+  document.getElementById('imageFileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    selectedImageFile = file;
+    pageImageUrl = null;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      document.getElementById('imgPreview').src = ev.target.result;
+      document.getElementById('imgPreviewWrap').style.display = '';
+      document.getElementById('uploadLabelText').textContent = 'Replace photo';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('removeImgBtn').addEventListener('click', () => {
+    pageImageUrl = null;
+    selectedImageFile = null;
+    document.getElementById('imgPreviewWrap').style.display = 'none';
+    document.getElementById('uploadLabelText').textContent = '📷 Add photo';
+  });
 }
 
 function renderMatches(matches) {
