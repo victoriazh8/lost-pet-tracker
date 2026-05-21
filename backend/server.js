@@ -442,12 +442,12 @@ app.post('/api/sync/reddit', syncLimiter, async (req, res) => {
       if (existing) continue;
 
       db.prepare(`
-        INSERT INTO pets (type, petType, name, breed, color, location, dateLost, description, imageUrl, source, externalId, dateReported, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO pets (type, petType, name, breed, color, location, dateLost, description, imageUrl, source, externalId, sourceUrl, dateReported, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).run(
         pet.type, pet.petType, pet.name, pet.breed, pet.color, pet.location,
         pet.dateLost, pet.description, pet.imageUrl,
-        pet.source, pet.externalId, now, now
+        pet.source, pet.externalId, pet.sourceUrl || null, now, now
       );
       added++;
     }
@@ -476,12 +476,12 @@ app.post('/api/sync/craigslist', syncLimiter, async (req, res) => {
       if (existing) continue;
 
       db.prepare(`
-        INSERT INTO pets (type, petType, name, breed, color, location, dateLost, description, imageUrl, source, externalId, dateReported, createdAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO pets (type, petType, name, breed, color, location, dateLost, description, imageUrl, source, externalId, sourceUrl, dateReported, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).run(
         pet.type, pet.petType, pet.name, pet.breed, pet.color, pet.location,
         pet.dateLost, pet.description, pet.imageUrl,
-        pet.source, pet.externalId, now, now
+        pet.source, pet.externalId, pet.sourceUrl || null, now, now
       );
       added++;
     }

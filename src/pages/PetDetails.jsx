@@ -54,6 +54,19 @@ const PetDetails = () => {
 
         <PetHero pet={pet} />
 
+        {pet.sourceUrl && (
+          <div className="mt-4">
+            <a
+              href={pet.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-800 hover:underline"
+            >
+              View original post →
+            </a>
+          </div>
+        )}
+
         {(pet.contactName || pet.contactInfo) && (
           <div className="mt-6 bg-teal-50 border border-teal-200 rounded-lg p-5">
             <h3 className="text-sm font-semibold text-teal-800 mb-2">Contact</h3>

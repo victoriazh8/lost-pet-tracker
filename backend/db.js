@@ -32,6 +32,7 @@ for (const col of [
   'source TEXT', 'externalId TEXT', 'color TEXT',
   'contactName TEXT', 'contactInfo TEXT',
   'size TEXT', 'coatPattern TEXT',
+  'sourceUrl TEXT',
 ]) {
   try { db.prepare(`ALTER TABLE pets ADD COLUMN ${col}`).run(); } catch {}
 }

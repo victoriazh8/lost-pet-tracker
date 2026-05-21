@@ -94,5 +94,6 @@ export function mapItemToPet(item, cityLabel) {
     imageUrl:    null,
     source:      'craigslist',
     externalId:  extractPostId(item.link),
+    sourceUrl:   item.link,
   };
 }

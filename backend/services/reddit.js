@@ -45,5 +45,6 @@ export function mapPostToPet(post) {
     imageUrl:    extractImage(post),
     source:      'reddit',
     externalId:  post.id,
+    sourceUrl:   `https://www.reddit.com${post.permalink}`,
   };
 }

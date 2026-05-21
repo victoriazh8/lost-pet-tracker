@@ -73,7 +73,11 @@ function PetHero({ pet }) {
           )}
 
           {pet.source && (
-            <p className="text-sm text-gray-400 mt-2">Source: {pet.source}</p>
+            <p className="text-sm text-gray-400 mt-2">
+              Source: {pet.sourceUrl
+                ? <a href={pet.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">{pet.source}</a>
+                : pet.source}
+            </p>
           )}
         </div>
 
