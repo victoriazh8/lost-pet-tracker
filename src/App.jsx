@@ -5,6 +5,7 @@ import LostPets from './pages/LostPets';
 import FoundPets from './pages/FoundPets';
 import ReportPet from './pages/ReportPet';
 import PetDetails from './pages/PetDetails';
+import Admin from './pages/Admin';
 import './index.css';
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/found" element={<FoundPets />} />
         <Route path="/reportPet" element={<ReportPet />} />
         <Route path="/pets/:id" element={<PetDetails />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={
           <div className="max-w-xl mx-auto mt-16 text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">404</h1>
