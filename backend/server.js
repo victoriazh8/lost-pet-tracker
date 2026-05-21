@@ -12,6 +12,9 @@ import Anthropic from '@anthropic-ai/sdk';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Trust Fly.io's proxy so express-rate-limit can read the real client IP
+app.set('trust proxy', 1);
+
 // Anthropic client is created lazily so the server starts fine when USE_AI=false
 // and ANTHROPIC_API_KEY is not set.
 let _anthropic = null;
